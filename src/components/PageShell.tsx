@@ -34,19 +34,18 @@ export function PageShell({ brand, sections, children }: PageShellProps) {
                 <img
                   src={assetUrl(brand.logo)}
                   alt={`${brand.name} logo`}
-                  className="h-20 w-auto object-contain"
+                  className="h-5.5 w-auto object-contain"
                 />
               )}
-              <h1 className="text-xl font-bold text-white leading-1">Brand Style Guide</h1>
             </div>
             
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-6 text-base font-medium">
+            <nav className="hidden md:flex items-center space-x-6 text-base font-normal">
               {visibleSections.map((section) => (
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className="transition-colors text-white hover:text-foreground cursor-pointer"
+                  className="transition-colors text-white hover:underline underline-offset-5 cursor-pointer"
                 >
                   {section.label}
                 </button>
@@ -55,28 +54,28 @@ export function PageShell({ brand, sections, children }: PageShellProps) {
             
             {/* Mobile Menu Button */}
             <Button
-              variant="ghost"
+              variant="link"
               size="sm"
-              className={"md:hidden rounded" + (mobileNavOpen ? " bg-white" : "")}
+              className={"md:hidden rounded text-white"}
               onClick={() => setMobileNavOpen(!mobileNavOpen)}
             >
               {mobileNavOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-6 w-6" />
               )}
             </Button>
           </div>
           
           {/* Mobile Navigation */}
           {mobileNavOpen && (
-            <nav className="md:hidden border-t py-4 bg-white rounded px-4">
+            <nav className="md:hidden py-4 bg-white px-4">
               <div className="space-y-3">
                 {visibleSections.map((section) => (
                   <button
                     key={section.id}
                     onClick={() => scrollToSection(section.id)}
-                    className="block w-full text-left px-2 py-2 text-sm font-medium transition-colors hover:text-foreground/80 text-[#A2BAC5] cursor-pointer"
+                    className="block w-full text-left px-2 py-2 text-sm font-medium transition-colors hover:text-foreground/80  cursor-pointer"
                   >
                     {section.label}
                   </button>
@@ -90,15 +89,13 @@ export function PageShell({ brand, sections, children }: PageShellProps) {
       {/* Main Content */}
       <main>
         {/* Page Content */}
-        <div className="space-y-16">{children}</div>
+        <div>{children}</div>
       </main>
 
       {/* Footer */}
-      <footer className="">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          {/* <p className="text-center text-sm text-main-blue">
-            Made with ❤️ by Seed
-          </p> */}
+      <footer className="bg-[#26260E]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center">
+          <p className="text-white opacity-30 text-sm">Gift & Wrap | Brand Style Guide 1.0 | {new Date().getFullYear()}</p>
         </div>
       </footer>
     </div>

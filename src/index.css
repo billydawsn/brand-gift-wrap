@@ -43,7 +43,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --main-blue: #335C70;
+  --base-text: #26260E;
 }
 
 :root {
@@ -116,21 +116,24 @@
 }
 
 /* add tailwind colours for --main-blue */
-
+ 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 400!important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Martel', serif;
+    font-family: 'Playfair Display', serif;
     font-weight: 300!important;
-    color: #335C70;
+    color: #26260E;
   }
-  .text-main-blue {
-    color: var(--main-blue);
+  .text-main {
+    color: var(--base-text);
   }
 }

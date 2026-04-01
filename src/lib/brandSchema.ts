@@ -53,6 +53,7 @@ const FontSourceSchema = z.discriminatedUnion("type", [
 
 const FontSchema = z.object({
   name: z.string(),
+  label: z.string().optional(),
   source: FontSourceSchema,
 })
 
@@ -107,6 +108,12 @@ const BrandInfoSchema = z.object({
   logo: z.string().optional(),
 })
 
+// Icon Schema
+const IconItemSchema = z.object({
+  name: z.string(),
+  src: z.string(),
+})
+
 // Main Brand Guidelines Schema
 export const BrandGuidelinesSchema = z.object({
   brand: BrandInfoSchema,
@@ -117,6 +124,7 @@ export const BrandGuidelinesSchema = z.object({
   colors: z.array(ColorSchema).optional(),
   typography: TypographySchema.optional(),
   gallery: z.array(GalleryItemSchema).optional(),
+  icons: z.array(IconItemSchema).optional(),
 })
 
 // Inferred Types

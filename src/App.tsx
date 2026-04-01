@@ -10,6 +10,7 @@ import { FullwidthBlock } from "@/components/FullwidthBlock"
 import { ColorPaletteBlock } from "@/components/ColorPaletteBlock"
 import { TypographyBlock } from "@/components/TypographyBlock"
 import { GalleryBlock } from "@/components/GalleryBlock"
+import { IconographyBlock } from "@/components/IconographyBlock"
 import { BrandGuidelinesSchema, type BrandGuidelines } from "@/lib/brandSchema"
 import { assetUrl } from "@/lib/asset"
 
@@ -90,70 +91,71 @@ function App() {
     { id: "incorrect-usage", label: "Incorrect Usage", visible: false },
     { id: "colors", label: "Colours", visible: !!data.colors?.length },
     { id: "typography", label: "Typography", visible: !!data.typography },
+    { id: "iconography", label: "Iconography", visible: !!data.icons?.length },
     { id: "gallery", label: "Application", visible: !!data.gallery?.length },
   ]
 
   return (
     <PageShell brand={data.brand} sections={sections}>
 
-      {data.fullwidthBlocks && data.fullwidthBlocks[0] && (
-        <FullwidthBlock className="mt-0" block={data.fullwidthBlocks[0]} />
-      )}
+      <div className="relative w-full h-64 overflow-hidden rounded-none bg-[#26260E]"></div>
 
-      <Section id="brand" title="Brand" className="mt-10" description="Chapel House is a calm, considered coastal brand rooted in comfort, quality and understated elegance. The visual identity reflects a balance between heritage and modern living, drawing inspiration from natural textures, seaside tones and relaxed interiors. Every application of the brand should feel warm, welcoming and timeless rather than trend-led or decorative. Consistency across all touch points is essential to maintain recognition and protect the integrity of the brand.">
+      <Section id="brand" title="Brand Guidelines" description="Gift & Wrap is a refined jewellery and gifting destination, rooted in quality, care and considered detail. The brand brings together a curated selection of pieces with a thoughtful, personal approach to gifting.\nThe visual identity balances elegance with warmth, drawing on soft tones, fluid forms and subtle handcrafted elements. It should feel calm, premium and approachable — timeless rather than trend-led. Consistency across all touchpoints is key to building recognition and maintaining the integrity of the brand.">
         <></>
       </Section>
 
-      {data.fullwidthBlocks && data.fullwidthBlocks[1] && (
-        <FullwidthBlock block={data.fullwidthBlocks[1]} />
+      {data.fullwidthBlocks && data.fullwidthBlocks[0] && (
+        <FullwidthBlock block={data.fullwidthBlocks[0]} />
       )}
 
       {data.logos && data.logos.length > 0 && (
-        <Section id="logos" title="Logo" description="The Chapel House logo is the primary visual identifier and must be used consistently across all communications. Designed for both print and digital use, it should never be altered or recreated and should always appear clear, legible and unobstructed.\nThe logo is supplied in PNG and SVG formats. SVG files are preferred for digital use and large-scale print to ensure crisp reproduction, while PNG files are suitable for everyday digital applications.\nReduced opacity may be used only in considered, editorial-style applications and should never fall below 50%. Opacity should not be applied in functional contexts such as headers, footers or navigation, where clarity is essential.">
+        <Section id="logos" title="Logo" description="The Gift & Wrap logo is the primary visual identifier and should be used consistently across all communications. Designed to feel refined, fluid and timeless, it reflects the balance of elegance and warmth at the heart of the brand.\nThe logo should always be used in its approved formats and remain clear, legible and unobstructed. It must not be altered, distorted or modified in any way. Ensure sufficient spacing is maintained around the logo to preserve its clarity and impact across all applications.\nPrimary and secondary logo variations are provided for flexibility across different backgrounds. Select the version that offers the strongest contrast and readability, while maintaining a consistent and considered appearance.">
           <LogoBlock logos={data.logos} />
         </Section>
       )}
 
       {data.exclusionZone && (
-        <Section id="exclusion-zone" title="Exclusion Zone" description="To preserve clarity and impact, the logo must always be surrounded by a clear space free from text, imagery or graphic elements.\nThe exclusion zone is defined by the height of the central emblem within the logo. This measurement should be applied equally on all sides.\nNo elements should enter this space under any circumstances.">
-          <ExclusionZoneBlock exclusionZone={data.exclusionZone} />
-        </Section>
+        <ExclusionZoneBlock exclusionZone={data.exclusionZone} />
       )}
 
       {data.incorrectUsage && data.incorrectUsage.length > 0 && (
-        <Section id="incorrect-usage" title="Incorrect Usage" description="Only approved logo assets should ever be used. To protect brand consistency, the following uses of the logo are not permitted:">
+        <Section id="usage" title="Usage" description="Only approved logo assets should ever be used. To protect brand consistency, the following uses of the logo are not permitted:">
           <IncorrectUsageBlock items={data.incorrectUsage} />
         </Section>
+      )}
+
+      {data.colors && data.colors.length > 0 && (
+        <Section id="colors" className="-mt-24" title="Colour" description="The palette is designed to feel warm, balanced and quietly premium, reflecting both gifting and jewellery. Each tone works together as part of a cohesive system, combining depth with softness.\nUse colour with restraint, allow space and contrast to lead layouts rather than overfilling with colour. Avoid using too many tones at once; keep combinations considered and minimal.">
+          <ColorPaletteBlock colors={data.colors} />
+        </Section>
+      )}
+
+      {data.fullwidthBlocks && data.fullwidthBlocks[1] && (
+        <FullwidthBlock block={data.fullwidthBlocks[1]} />
+      )}
+
+      {data.typography && (
+        <TypographyBlock id="typography" typography={data.typography} />
       )}
 
       {data.fullwidthBlocks && data.fullwidthBlocks[2] && (
         <FullwidthBlock block={data.fullwidthBlocks[2]} />
       )}
 
-      {data.colors && data.colors.length > 0 && (
-        <Section id="colors" title="Colour" description="The Chapel House colour palette is inspired by coastal landscapes, natural materials and soft interiors. It has been designed to feel calm, warm and sophisticated.\nPrimary colours should dominate. Secondary colours are used to support, never to overpower. Avoid using multiple accent colours together in a single composition.">
-          <ColorPaletteBlock colors={data.colors} />
+      {data.icons && data.icons.length > 0 && (
+        <Section id="iconography" className="pb-0" title="Iconography" description="The iconography adopts a hand-drawn, quietly expressive style, using simple and recognisable forms with subtle detailing to introduce warmth and personality.\nIcons should be used primarily in Cocoa Brown, sitting on Pearl Dust backgrounds to create a soft, refined contrast that aligns with the wider palette. Pearl Dust can also be used on image overlays and darker backgrounds to maintain consistency and legibility. This combination keeps the overall feel light, premium and approachable.\nUse icons sparingly and consistently, ensuring they support content rather than dominate it. Avoid overcomplicating shapes or introducing additional styles, so the system remains cohesive and easy to recognise.">
+            <IconographyBlock icons={data.icons} />
+        </Section>
+      )}
+
+      {data.gallery && data.gallery.length > 0 && (
+        <Section id="gallery" title="Application" description="The brand is designed to work seamlessly across digital and print, bringing together colour, typography and iconography into a cohesive and considered system. Soft, neutral backgrounds are paired with deeper tones for contrast, while refined typography ensures clarity and elegance throughout. Iconography adds subtle moments of personality without overpowering the overall look. Together, these elements create a consistent, premium and approachable visual language.\nThe examples below show how the identity comes together across the website, social and print, with all elements working in harmony.">
+          <GalleryBlock gallery={data.gallery} />
         </Section>
       )}
 
       {data.fullwidthBlocks && data.fullwidthBlocks[3] && (
         <FullwidthBlock block={data.fullwidthBlocks[3]} />
-      )}
-
-      {data.typography && (
-        <Section id="typography" title="Typography" description="Typography plays a key role in expressing the Chapel House personality. It should feel elegant, readable and quietly confident.\nMartel is the primary typeface and is used for headings and key brand statements, bringing a sense of character and refinement to the identity. Mulish is the supporting typeface, used for subheadings, body copy and functional elements, chosen for its clarity and modern balance. \nTogether, the two typefaces create a clear hierarchy while maintaining a consistent, understated tone. Spacing, weight and case should be used thoughtfully to ensure content feels considered and easy to read, never dense or overly styled.">
-          <TypographyBlock typography={data.typography} />
-        </Section>
-      )}
-
-      {data.fullwidthBlocks && data.fullwidthBlocks[4] && (
-        <FullwidthBlock block={data.fullwidthBlocks[4]} />
-      )}
-
-      {data.gallery && data.gallery.length > 0 && (
-        <Section id="gallery" className="mt-20" title="Application" description="The Chapel House brand should be applied consistently across all applications to create a calm, refined and recognisable presence. Colour, typography and imagery should be used with restraint, allowing space and balance to lead each layout. Clarity and simplicity should always take priority, ensuring the brand feels timeless, intentional and true to the Chapel House character.">
-          <GalleryBlock gallery={data.gallery} />
-        </Section>
       )}
 
     </PageShell>

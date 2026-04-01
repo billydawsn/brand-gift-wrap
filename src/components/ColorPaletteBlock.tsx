@@ -62,11 +62,11 @@ export function ColorPaletteBlock({ colors }: ColorPaletteBlockProps) {
 
   return (
     <Container>
-      <div className="space-y-6 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-18">
       {/* Role Filter Tabs */}
       {filteredRoles.length > 1 && (
-        <Tabs value={selectedRole} onValueChange={setSelectedRole} className="w-full bg-transparent">
-          <TabsList className="w-full justify-start overflow-x-auto flex-wrap h-auto bg-transparent gap-2">
+        <Tabs value={selectedRole} onValueChange={setSelectedRole} className="bg-transparent">
+          <TabsList className="flex flex-col gap-5 h-auto bg-transparent items-start">
             <TabsTrigger value="all">All Colors</TabsTrigger>
             {filteredRoles.map((role) => (
               <TabsTrigger key={role} value={role}>
@@ -79,44 +79,39 @@ export function ColorPaletteBlock({ colors }: ColorPaletteBlockProps) {
       )}
 
       {/* Color Grid */}
-      <div className="grid gap-6 grid-cols-1 lg:grid-cols-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 md:col-span-2 w-full">
       {filteredColors.map((color, idx) => (
           <Card 
             key={idx} 
-            className={`overflow-hidden cursor-pointer transition-all hover:shadow-lg hover:scale-[1.02] rounded-none shadow-none ${
-              color.role?.includes("Primary") 
+            className={`overflow-hidden cursor-pointer rounded-none shadow-none border-0 relative ${
+              selectedRole.includes("all") 
                 ? "col-span-1 lg:col-span-6" 
-                : color.role?.includes("Primary Opacity") || color.role?.includes("Secondary Opacity")
-                ? "col-span-1 lg:col-span-3" 
-                : "col-span-1 lg:col-span-4"
+                : "col-span-1 lg:col-span-3"
             }`}
             onClick={() => setSelectedColor(color)}
+            style={{ backgroundColor: color.values.hex }}
           >
-            <div
-              className={`w-full ${color.role?.includes("Secondary Opacity") ? "h-28" : "h-52"}`}
-              style={{ backgroundColor: color.values.hex }}
-            />
-            <CardHeader className="pb-4">
-              <CardTitle className="text-lg text-[#335C70]">
+            <CardHeader className="pb-4 pt-48">
+              <CardTitle className="text-lg font-normal text-white mb-0">
                 {color.name}
+                <p className="text-sm font-normal text-white">{color.values.hex}</p>
                 {color.opacity && (
-                  <div className="text-sm font-normal text-muted-foreground mt-1">
+                  <div className="text-sm font-normal text-white mt-1">
                     {color.opacity}
                   </div>
                 )}
               </CardTitle>
               <CardDescription className="flex items-center justify-between">
-                <span className="text-sm">{color.values.hex}</span>
                 <Button
                   size="sm"
-                  variant="ghost"
-                  className="h-6 w-6 p-0"
+                  variant="link"
+                  className="h-6 w-6 p-0 absolute top-4 left-4"
                   onClick={(e) => {
                     e.stopPropagation()
                     handleCopy(color.values.hex, "HEX")
                   }}
                 >
-                  <Copy className="h-3 w-3" />
+                  <Copy className="h-4 w-4 text-white" />
                   <span className="sr-only">Copy HEX</span>
                 </Button>
               </CardDescription>
@@ -127,7 +122,7 @@ export function ColorPaletteBlock({ colors }: ColorPaletteBlockProps) {
 
       {/* Color Detail Dialog */}
       <Dialog open={!!selectedColor} onOpenChange={() => setSelectedColor(null)}>
-        <DialogContent className="max-w-xs">
+        <DialogContent className="max-w-xs rounded-none border-0">
           {selectedColor && (
             <>
               <DialogHeader>
@@ -137,7 +132,7 @@ export function ColorPaletteBlock({ colors }: ColorPaletteBlockProps) {
               <div className="space-y-6">
                 {/* Color Swatch */}
                 <div
-                  className="h-32 w-full rounded-lg border"
+                  className="h-32 w-full"
                   style={{ backgroundColor: selectedColor.values.hex }}
                 />
 
