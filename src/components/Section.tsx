@@ -1,5 +1,6 @@
 import { type ReactNode } from "react"
 import { Container } from "@/components/ui/container"
+import { Download } from "lucide-react"
 
 interface SectionProps {
   id: string
@@ -7,9 +8,10 @@ interface SectionProps {
   description?: string
   children: ReactNode
   className?: string
+  downloadLink?: string
 }
 
-export function Section({ id, title, description, children, className = "" }: SectionProps) {
+export function Section({ id, title, description, children, className = "", downloadLink }: SectionProps) {
   const descriptionParagraphs = description 
     ? description.split(/\\n|\n/).filter(p => p.trim()) 
     : []
@@ -26,6 +28,11 @@ export function Section({ id, title, description, children, className = "" }: Se
               {descriptionParagraphs.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
+              {downloadLink && (
+                <a href={downloadLink} download target="_blank" className="text-muted-foreground hover:text-foreground transition-colors opacity-75">
+                  <Download className="h-5 w-5" />
+                </a>
+              )}
             </div>
           )}
         </div>

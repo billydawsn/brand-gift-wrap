@@ -27,7 +27,7 @@ export function TypographyBlock({ typography, id }: TypographyBlockProps) {
   const showTabs = typography.fonts.length > 1 || typography.examples.length > 0
 
   const typePreviews = {
-    'playfair display': 'Discover your perfect piece',
+    'playfairdisplay': 'Discover Your Perfect Piece',
     'epilogue': 'Pieces crafted to inspire and adorn',
   } as { [key: string]: string }
 
@@ -167,9 +167,8 @@ export function TypographyBlock({ typography, id }: TypographyBlockProps) {
                                           style={{
                                             fontFamily: font.name,
                                             fontWeight: weight,
-                                            fontSize: "20px",
                                           }}
-                                          className="text-main"
+                                          className="text-main text-2xl xl:text-3xl"
                                         >
                                           {getWeightName(weight)}
                                         </p>
@@ -180,11 +179,10 @@ export function TypographyBlock({ typography, id }: TypographyBlockProps) {
                                           style={{
                                             fontFamily: font.name,
                                             fontWeight: weight,
-                                            fontSize: "20px",
                                           }}
-                                          className="text-main left"
+                                          className="text-main md:right md:text-right text-2xl xl:text-3xl"
                                         >
-                                          {typePreviews[font.name.toLowerCase()] || 'Discover your perfect piece'}
+                                          {typePreviews[font.name.toLowerCase().replace(' ', '')] || 'Discover your perfect piece'}
                                         </p>
                                       </div>
                                     </div>

@@ -19,6 +19,13 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
+  // set page title based on brand name
+  useEffect(() => {
+    if (data?.brand?.name) {
+      document.title = `${data.brand.name} - Brand Guidelines`
+    }
+  }, [data])
+
   useEffect(() => {
     async function loadData() {
       try {
@@ -109,7 +116,12 @@ function App() {
       )}
 
       {data.logos && data.logos.length > 0 && (
-        <Section id="logos" title="Logo" description="The Gift & Wrap logo is the primary visual identifier and should be used consistently across all communications. Designed to feel refined, fluid and timeless, it reflects the balance of elegance and warmth at the heart of the brand.\nThe logo should always be used in its approved formats and remain clear, legible and unobstructed. It must not be altered, distorted or modified in any way. Ensure sufficient spacing is maintained around the logo to preserve its clarity and impact across all applications.\nPrimary and secondary logo variations are provided for flexibility across different backgrounds. Select the version that offers the strongest contrast and readability, while maintaining a consistent and considered appearance.">
+        <Section 
+            id="logos" 
+            title="Logo" 
+            description="The Gift & Wrap logo is the primary visual identifier and should be used consistently across all communications. Designed to feel refined, fluid and timeless, it reflects the balance of elegance and warmth at the heart of the brand.\nThe logo should always be used in its approved formats and remain clear, legible and unobstructed. It must not be altered, distorted or modified in any way. Ensure sufficient spacing is maintained around the logo to preserve its clarity and impact across all applications.\nPrimary and secondary logo variations are provided for flexibility across different backgrounds. Select the version that offers the strongest contrast and readability, while maintaining a consistent and considered appearance."
+            downloadLink="https://drive.google.com/drive/folders/1y391L6fqiSgWk93j5KEwGGsHkxEZoydg"
+            >
           <LogoBlock logos={data.logos} />
         </Section>
       )}
@@ -143,7 +155,12 @@ function App() {
       )}
 
       {data.icons && data.icons.length > 0 && (
-        <Section id="iconography" className="pb-0" title="Iconography" description="The iconography adopts a hand-drawn, quietly expressive style, using simple and recognisable forms with subtle detailing to introduce warmth and personality.\nIcons should be used primarily in Cocoa Brown, sitting on Pearl Dust backgrounds to create a soft, refined contrast that aligns with the wider palette. Pearl Dust can also be used on image overlays and darker backgrounds to maintain consistency and legibility. This combination keeps the overall feel light, premium and approachable.\nUse icons sparingly and consistently, ensuring they support content rather than dominate it. Avoid overcomplicating shapes or introducing additional styles, so the system remains cohesive and easy to recognise.">
+        <Section 
+          id="iconography" 
+          className="pb-0" 
+          title="Iconography" 
+          description="The iconography adopts a hand-drawn, quietly expressive style, using simple and recognisable forms with subtle detailing to introduce warmth and personality.\nIcons should be used primarily in Cocoa Brown, sitting on Pearl Dust backgrounds to create a soft, refined contrast that aligns with the wider palette. Pearl Dust can also be used on image overlays and darker backgrounds to maintain consistency and legibility. This combination keeps the overall feel light, premium and approachable.\nUse icons sparingly and consistently, ensuring they support content rather than dominate it. Avoid overcomplicating shapes or introducing additional styles, so the system remains cohesive and easy to recognise."
+          downloadLink="https://drive.google.com/drive/folders/1ESR9_v97w2Ju2rD84PlTHRCWWQKWaRPr">
             <IconographyBlock icons={data.icons} />
         </Section>
       )}

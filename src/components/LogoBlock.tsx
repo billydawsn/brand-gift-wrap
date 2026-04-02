@@ -11,7 +11,6 @@ interface LogoBlockProps {
 }
 
 export function LogoBlock({ logos }: LogoBlockProps) {
-  console.log(logos)
   return (
     <>
       <Container>
