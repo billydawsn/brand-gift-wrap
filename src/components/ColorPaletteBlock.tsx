@@ -60,9 +60,29 @@ export function ColorPaletteBlock({ colors }: ColorPaletteBlockProps) {
     return colors.filter((color) => color.role?.includes(selectedRole))
   }, [colors, selectedRole])
 
+  const descriptions = {
+    "all": "The palette is designed to feel warm, balanced and quietly premium, reflecting both gifting and jewellery. Each tone works together as part of a cohesive system, combining depth with softness.\nUse colour with restraint, allow space and contrast to lead layouts rather than overfilling with colour. Avoid using too many tones at once; keep combinations considered and minimal.",
+    "Primary Opacity": "The primary colours form the foundation of the brand and should be used most prominently. They anchor the identity and create a clear, recognisable presence.\nUse for logos, headings, and key backgrounds to maintain consistency and clarity. Pair with lighter tones to keep layouts feeling refined and breathable.\nAvoid overusing primary colours in large blocks without contrast, as this can feel heavy.",
+    "Secondary Opacity": "The secondary palette adds depth and variation, supporting the core identity without overpowering it.\nUse for subheadings, interface elements, layered compositions and sparingly across social media to add richness. Avoid using these colours in large areas, particularly on the website. Maintain balance by keeping primary colours dominant and avoiding equal distribution across the palette.",
+  } as Record<string, string>
+
+  const descriptionParagraphs = descriptions[selectedRole]
+    ? descriptions[selectedRole].split(/\\n|\n/).filter(p => p.trim()) 
+    : []
+
   return (
     <Container>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-18">
+
+      <div id="colors" className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            <h2 className="text-3xl  tracking-tight mb-0">Colours</h2>
+            <div className="text-main md:col-span-2 max-w-2xl space-y-4">
+                {descriptionParagraphs.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+            </div>
+        </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-18 pb-24">
       {/* Role Filter Tabs */}
       {filteredRoles.length > 1 && (
         <Tabs value={selectedRole} onValueChange={setSelectedRole} className="bg-transparent">

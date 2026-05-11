@@ -137,9 +137,7 @@ function App() {
       )}
 
       {data.colors && data.colors.length > 0 && (
-        <Section id="colors" className="-mt-24" title="Colour" description="The palette is designed to feel warm, balanced and quietly premium, reflecting both gifting and jewellery. Each tone works together as part of a cohesive system, combining depth with softness.\nUse colour with restraint, allow space and contrast to lead layouts rather than overfilling with colour. Avoid using too many tones at once; keep combinations considered and minimal.">
-          <ColorPaletteBlock colors={data.colors} />
-        </Section>
+        <ColorPaletteBlock colors={data.colors} />
       )}
 
       {data.fullwidthBlocks && data.fullwidthBlocks[1] && (
